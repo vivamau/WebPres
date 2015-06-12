@@ -4,9 +4,12 @@ var PageTransitions = (function() {
 		$pages = $main.children( 'div.pt-page' ),
 		$iterateForward = $( '#forward' ),
         $iterateBackward = $('#back'),
-		animcursor = 1,
+        $slideShow = $('#slideShow'),
+		animFWcursor = 62,
+		animBKcursor = 63,
 		pagesCount = $pages.length,
 		current = 0,
+		slideShow = false,
 		isAnimating = false,
 		endCurrPage = false,
 		endNextPage = false,
@@ -22,7 +25,7 @@ var PageTransitions = (function() {
 		support = Modernizr.cssanimations;
 	
 	function init() {
-        $("#back").hide();
+		$iterateBackward.hide();
 		$pages.each( function() {
 			var $page = $( this );
 			$page.data( 'originalClassList', $page.attr( 'class' ) );
@@ -30,20 +33,40 @@ var PageTransitions = (function() {
 
 		$pages.eq( current ).addClass( 'pt-page-current' );
 
+		$slideShow.on ('click', function() {
+			if (!slideShow) {
+				slideShow = true;
+				isAnimating = false;
+				$iterateBackward.hide("slow");
+				$iterateForward.hide("slow");
+				$slideShow.text("Stop Slide Show");
+				setTimeout(function() {
+				if( isAnimating ) {return false;}
+				nextPage( animFWcursor,'forward' );
+				},300 );
+			} else {
+				slideShow = false;
+				$slideShow.text("Start Slide Show");
+				$iterateBackward.show("slow");
+				$iterateForward.show("slow");
+				isAnimating = true;
+			}
+		});
+
+		
 		$iterateForward.on( 'click', function() {
+			if (!slideShow) {isAnimating = false}
 			if( isAnimating ) {
 				return false;
 			}
-			animcursor = 24;
-			nextPage( animcursor,'forward' );
+			nextPage( animFWcursor,'forward' );
 		} );
 		$iterateBackward.on( 'click', function() {
-            
+            if (!slideShow) {isAnimating = false}
 			if( isAnimating ) {
 				return false;
 			}
-            animcursor = 25;
-			nextPage( animcursor,'back' );
+			nextPage( animBKcursor,'back' );
 		} );
 	}
 
@@ -71,9 +94,11 @@ var PageTransitions = (function() {
                 current = 0;
             }
 		}
-        $("#back").show();
-        if (current == 0) {
-            $("#back").hide();
+		if (!slideShow) {
+	        $iterateBackward.show("slow");
+	        if (current == 0) {
+	            $iterateBackward.hide("slow");
+	        }
         }
         $(".pager").text("page " + (current+1) + " of " + $pages.length); 
 		var $nextPage = $pages.eq( current ).addClass( 'pt-page-current' ),
@@ -384,6 +409,14 @@ var PageTransitions = (function() {
 	function resetPage( $outpage, $inpage ) {
 		$outpage.attr( 'class', $outpage.data( 'originalClassList' ) );
 		$inpage.attr( 'class', $inpage.data( 'originalClassList' ) + ' pt-page-current' );
+		if (slideShow) {
+			setTimeout(function() {
+				if( isAnimating ) {
+					return false;
+				}
+				nextPage( animFWcursor,'forward' );
+			},2000 );
+		}
 	}
 
 	init();

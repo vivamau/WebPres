@@ -23,12 +23,10 @@ a:hover {
 	color: #fff;
 }
 
-
-
 .pager {
     position: absolute;
     z-index: 9999;
-    color: rgba(0,0,0,0.1);
+    color: rgba(0,0,0,0.2);
     top: 1%;
     left: 94%;
 }
@@ -148,7 +146,7 @@ a:hover {
 }
 
 .pt-triggers .dl-menuwrapper button,
-.forward,.back {
+.forward,.back,.slideShow {
 	border: none;
 	font-size: 30px;
 	font-weight: 700;
@@ -173,26 +171,24 @@ a:hover {
 .forward {
 	position: absolute;
 	width: 300px;
-	z-index: 999999;
+	z-index: 999998;
 	top: 90%;
-	left: 90%;
-	-webkit-transform: translateX(-50%);
-	-moz-transform: translateX(-50%);
-	-ms-transform: translateX(-50%); 
-	transform: translateX(-50%);
-    
+	left: 85%;
 }
 .back {
 	position: absolute;
-	width: 100%;
+	z-index: 999998;
+	top: 90%;
+    left: 1%;
+
+}
+.slideShow {
+	position: absolute;
 	z-index: 999999;
 	top: 90%;
-    left: 9%;
-	-webkit-transform: translateX(-50%);
-	-moz-transform: translateX(-50%);
-	-ms-transform: translateX(-50%); 
-	transform: translateX(-50%);
+	left: 41%;
 }
+
 .pt-message {
 	display: none;
 	position: absolute;
