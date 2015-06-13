@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Satisfy);
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 body, html { font-size: 100%; padding: 0; margin: 0;}
@@ -97,7 +97,6 @@ a:hover {
     margin: 0 15%;
 }
 .pt-page h1 span {
-	font-family: 'Satisfy', serif;
 	font-weight: 400;
 	font-size: 40%;
 	text-transform: none;
@@ -135,20 +134,15 @@ a:hover {
 	background: #f68dbb;
 }
 
-/* Triggers (menu and button) */
+/* Triggers (button) */
 
-.pt-triggers {
-
-}
-
-.no-js .pt-triggers {
+.no-js .forward,.back,.slideShow {
 	display: none;
 }
 
-.pt-triggers .dl-menuwrapper button,
 .forward,.back,.slideShow {
 	border: none;
-	font-size: 30px;
+	font-size: 20px;
 	font-weight: 700;
 	text-transform: uppercase;
 	margin: 10px 0 20px;

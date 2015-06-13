@@ -5,14 +5,15 @@ var PageTransitions = (function() {
 		$iterateForward = $( '#forward' ),
         $iterateBackward = $('#back'),
         $slideShow = $('#slideShow'),
-		animFWcursor = 62,
-		animBKcursor = 63,
+		animFWcursor = 1,
+		animBKcursor = 2,
 		pagesCount = $pages.length,
 		current = 0,
 		slideShow = false,
 		isAnimating = false,
 		endCurrPage = false,
 		endNextPage = false,
+		intervalTime = 3000, //milliseconds
 		animEndEventNames = {
 			'WebkitAnimation' : 'webkitAnimationEnd',
 			'OAnimation' : 'oAnimationEnd',
@@ -415,7 +416,7 @@ var PageTransitions = (function() {
 					return false;
 				}
 				nextPage( animFWcursor,'forward' );
-			},2000 );
+			},intervalTime );
 		}
 	}
 
